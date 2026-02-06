@@ -6,17 +6,6 @@ const keyLength = document.getElementById('keyLength'); //botoes da quantidade d
 const confirmButton = document.getElementById('confirmButton'); //botao de confirmar quantidade de numeros da senha
 
 
-
-
-
-
-
-
-
-//cORRIGIR
-
-
-
 // Adicionando os botões para selecionar a quantidade de números da senha
 for (let i = 3; i <= 10; i++) {
     const button = document.createElement('button');
@@ -24,9 +13,7 @@ for (let i = 3; i <= 10; i++) {
     button.addEventListener('click', () => {
         console.log(`Quantidade de números da senha: ${i}`);
         confirmButton.disabled = false;
-        confirmButton.addEventListener('click', () => {
-            play(i);
-        });
+        confirmButton.onclick = () => play(i);
     });
     keyLength.appendChild(button);
 }
