@@ -87,15 +87,21 @@ body{
     align-items: center;
 }
 
-#game-container{
+#list-tentativas{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.game-container{
     display: flex;
     width: 100vw;
     flex-direction: row;
-    padding: 1.0em 2em;
-    gap: 20px;
+    padding: 0.2em 2em;
     justify-content: space-around;
 }
-
 
 
 /* vou configurar para quando for media query */

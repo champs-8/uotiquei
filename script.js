@@ -1,7 +1,7 @@
 // Div principal do jogo
 //vou começar perguntando a quantidade de numeros da senha do amigo
 
-const gameContainer = document.getElementById('game-container'); //div geral
+const listTentativas = document.getElementById('list-tentativas'); //div que envolve as tentativas e o botão certo
 const keyLength = document.getElementById('keyLength'); //div botoes da quantidade de numeros da senha
 const confirmButton = document.getElementById('confirmButton'); //botao de confirmar quantidade de numeros da senha
 const tentativas = document.getElementById('tentativas'); //div que envolve as tentativas e o botão certo
@@ -37,7 +37,18 @@ const botaoCerto = document.createElement('button');
 botaoCerto.id = 'confirm-play-button';
 botaoCerto.textContent = 'V';
 
+
+let contagemDeTentativas = 0; //variavel para aumentar o id da div de jogada
+
 function build(length) {
+
+    //construir nova div game-container a cada rodada
+    let gameContainer = document.createElement('div');
+    gameContainer.className = 'game-container';
+    gameContainer.id = `game-container-${contagemDeTentativas}`; //id para cada rodada, incrementa a cada rodada
+    contagemDeTentativas++;
+    listTentativas.appendChild(gameContainer); //insere a div do jogo dentro da div de tentativas
+
 
     //botão para confirmar a jogada
     let confirmPlayButton = botaoCerto;
@@ -96,10 +107,12 @@ function build(length) {
         });
     }
 
-    gameContainer.appendChild(numberDiv); //insere os inputs para digitar os numeros da senha
-    tentativas.appendChild(confirmPlayButton); //insere o botão de Certo abaixo dos inputs
-
+    gameContainer.appendChild(numberDiv);
+    
     //==========================
+    
+    //insere os inputs para digitar os numeros da senha
+    tentativas.appendChild(confirmPlayButton); //insere o botão de Certo abaixo dos inputs
 
     confirmPlayButton.addEventListener("click", nextRodada); //chama função para pegar a quantidade de numeros da senha 
 
