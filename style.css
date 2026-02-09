@@ -10,6 +10,8 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    -webkit-user-select: none; /* Safari 3+ and Safari on iOS 3+ */
+    user-select: none; /* impede que o usuário selecione texto ou elementos da interface, melhorando a experiência de jogo */
     font-family: var(--fonte-principal);
 }
 
@@ -134,6 +136,27 @@ input[type=number]::-webkit-outer-spin-button {
 
 input[type=number] {
     appearance: textfield;
+}
+
+.bloqueado, .bloqueado-number {
+    background-color: #007bff;
+    color: white;
+}
+
+.bloqueado:active, .bloqueado-number:active {
+    border: none;
+}
+
+/* configuração visual de anotações */
+.verde{
+    background-color: #2ecc71;
+    color: black;
+    border-color: black;
+}
+.amarelo{
+    background-color: chocolate;
+    border-color: black;
+    color: black;
 }
 
 #confirm-play-button{

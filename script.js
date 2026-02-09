@@ -6,6 +6,10 @@ const keyLength = document.getElementById('keyLength'); //div botoes da quantida
 const confirmButton = document.getElementById('confirmButton'); //botao de confirmar quantidade de numeros da senha
 const tentativas = document.getElementById('tentativas'); //div que envolve as tentativas e o botão certo
 
+//impede que o usuário selecione texto ou elementos da interface, melhorando a experiência de jogo
+document.addEventListener('dblclick', e => {
+    e.preventDefault();
+});
 
 let numberEscolhido = 0; //variavel global para armazenar a quantidade de numeros da senha escolhida
 
@@ -15,7 +19,6 @@ for (let i = 3; i <= 10; i++) {
     button.textContent = i;
     button.className = 'length-button';
     button.addEventListener('click', () => {
-        console.log(`Quantidade de números da senha: ${i}`);
 
         numberEscolhido = i; //armazena a quantidade de numeros da senha escolhida
 
@@ -120,5 +123,42 @@ function build(length) {
 }
 
 function nextRodada() {
+    blockInputs(); //bloqueia os inputs da rodada atual para não poder mais editar
+    amareloOuVerde(); //ativa a função para alterar cor do botão de anotação
     build(numberEscolhido); // constrói a próxima rodada com a mesma quantidade de números da senha
+}
+
+function blockInputs() { //função para bloquear os inputs da rodada atual
+    const inputs = document.querySelectorAll(".digit-input"); //direita
+    const inputsInfo = document.querySelectorAll(".digit-info"); //esquerda
+    inputs.forEach(input => {
+        input.classList.add('bloqueado-number'); //adiciona classe para alterar o cursor e dar feedback visual
+        input.setAttribute("readonly", "true"); //bloqueia o input para não poder mais editar
+    });
+    inputsInfo.forEach(input => {
+        input.classList.add('bloqueado');
+        input.setAttribute("readonly", "true");
+    });
+}
+
+function amareloOuVerde(){
+    // código para alterar cor do botão para quando achar que o numero está no lugar certo ou errrado.
+    const inputsBloqueados = document.querySelectorAll('.bloqueado-number');
+
+    inputsBloqueados.forEach(input => {
+    input.addEventListener('click', () => {
+
+            if (input.classList.contains('verde')) {
+                input.classList.remove('verde');
+                input.classList.add('amarelo');
+
+            } else if (input.classList.contains('amarelo')) {
+                input.classList.remove('amarelo');
+
+            } else {
+                // primeiro clique
+                input.classList.add('verde');
+            }
+        });
+    });
 }
