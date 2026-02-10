@@ -5,7 +5,7 @@ const listTentativas = document.getElementById('list-tentativas'); //div que env
 const keyLength = document.getElementById('keyLength'); //div botoes da quantidade de numeros da senha
 const confirmButton = document.getElementById('confirmButton'); //botao de confirmar quantidade de numeros da senha
 const tentativas = document.getElementById('tentativas'); //div que envolve as tentativas e o botão certo
-
+const myPass = document.getElementById('myPass'); //div para mostrar a sua propria senha
 //impede que o usuário selecione texto ou elementos da interface, melhorando a experiência de jogo
 document.addEventListener('dblclick', e => {
     e.preventDefault();
@@ -29,12 +29,39 @@ for (let i = 3; i <= 10; i++) {
 }
 
 function play(length) {
+    
     let containerPasswordLength = document.getElementById('password-length-container');
     containerPasswordLength.style.display = 'none';
-
-    build(length); //chama a função para construir a interface do jogo, passando a quantidade de numeros da senha escolhida
+    
+    MyPass(length);
 }
 
+function MyPass(qtd) {
+    let pergunta = document.createElement('h1');
+    let inputMyPass =  document.createElement('input');
+
+    pergunta.textContent = 'Digite a sua senha:';
+    inputMyPass.className = 'input-my-pass';
+    inputMyPass.inputMode = 'numeric';
+    inputMyPass.maxLength = 10;
+    inputMyPass.min = 3;
+    inputMyPass.id = 'input-my-pass';
+
+    myPass.appendChild(pergunta);
+    myPass.appendChild(inputMyPass);
+
+    //=========================
+    //botão para confirmar a senha do jogador
+
+    let confirmMyPassButton = document.createElement('button');
+    confirmMyPassButton.id = 'confirm-my-pass-button';
+    confirmMyPassButton.textContent = 'Confirmar';
+    myPass.appendChild(confirmMyPassButton);
+
+    confirmMyPassButton.addEventListener("click", () => {
+        build(qtd); //chama a função para construir a interface do jogo, passando a quantidade de numeros da senha escolhida
+    });
+}
 
 const botaoCerto = document.createElement('button');
 botaoCerto.id = 'confirm-play-button';
@@ -44,6 +71,9 @@ botaoCerto.textContent = 'V';
 let contagemDeTentativas = 0; //variavel para aumentar o id da div de jogada
 
 function build(length) {
+
+    tentativas.style.display = 'flex'; //exibe a div de tentativas quando a primeira rodada for construída
+    myPass.style.display = 'none'; //esconde a div de digitar a propria senha quando a primeira rodada for construída
 
     //construir nova div game-container a cada rodada
     let gameContainer = document.createElement('div');
@@ -119,7 +149,6 @@ function build(length) {
             }
         });
     }
-    console.log(numberDiv);
 
     gameContainer.appendChild(numberDiv);
     

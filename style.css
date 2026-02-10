@@ -83,7 +83,7 @@ body{
 }
 
 #tentativas{
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -125,9 +125,6 @@ body{
     cursor: pointer;
     border: 2px solid var(--cor-primaria);
     font-size: 20px;
-}
-.digit-info::before {
-    content: attr(data-label);
 }
 
 /* remover as setas dos input number */
