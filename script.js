@@ -6,6 +6,7 @@ const keyLength = document.getElementById('keyLength'); //div botoes da quantida
 const confirmButton = document.getElementById('confirmButton'); //botao de confirmar quantidade de numeros da senha
 const tentativas = document.getElementById('tentativas'); //div que envolve as tentativas e o botão certo
 const myPass = document.getElementById('myPass'); //div para mostrar a sua propria senha
+const app = document.getElementById('app'); //div principal do jogo
 //impede que o usuário selecione texto ou elementos da interface, melhorando a experiência de jogo
 document.addEventListener('dblclick', e => {
     e.preventDefault();
@@ -134,42 +135,53 @@ function build(length) {
         
         //definindo atributos dos inputs
         input.className = 'digit-input';
+        input.type = 'text';
         input.inputMode = 'numeric';
         input.maxLength = 1;
         input.min = 0;
         input.id = `digit-${i+1}`;
         numberDiv.appendChild(input);
-
-        //focus automático -
-        // pula pro próximo
-
-
+        
         
         // garantir numeros de 0 a 9 e apenas 1 digito
         input.addEventListener("input", () => {
             input.value = input.value.replace(/\D/g, "").slice(0, 1);
-        
-        //valida se os inputs estão vazios quando clicados
+            
+            
+            //valida se os inputs estão vazios quando clicados
             const inputsAll = document.querySelectorAll(".digit-input");
             const todosPreenchidos = [...inputsAll].every(i => i.value !== "");
             confirmPlayButton.disabled = !todosPreenchidos;
+            
+            //focus automático -
+            // pula pro próximo
+            // se digitou 1 número, vai para o próximo
+            if (input.value.length === 1 && i < length - 1) {
+                numberDiv.children[i + 1].focus();
+            }
+            
+            // Se é o último e todos estão preenchidos → vai pro botão
+            if (input.value && i === length - 1 && todosPreenchidos) {
+                confirmPlayButton.focus();
+            }
         });
 
         // backspace volta pro anterior
-        input.addEventListener('keydown', e => {
-            if (e.key === 'Backspace' && !input.value && i > 0) {
+        input.addEventListener("keydown", e => {
+            if (e.key === "Backspace" && input.value === "" && i > 0) {
                 numberDiv.children[i - 1].focus();
             }
         });
     }
 
     gameContainer.appendChild(numberDiv);
+    numberDiv.children[0].focus(); //foca automaticamente no primeiro input da rodada quando ela for criada
     
     //==========================
     
     //insere os inputs para digitar os numeros da senha
-    tentativas.appendChild(confirmPlayButton); //insere o botão de Certo abaixo dos inputs
-
+    app.appendChild(confirmPlayButton); //insere o botão de Certo abaixo dos inputs
+    
     confirmPlayButton.addEventListener("click", nextRodada);
 }
 
