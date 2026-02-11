@@ -13,6 +13,7 @@
     -webkit-user-select: none; /* Safari 3+ and Safari on iOS 3+ */
     user-select: none; /* impede que o usuário selecione texto ou elementos da interface, melhorando a experiência de jogo */
     font-family: var(--fonte-principal);
+    touch-action: manipulation; /* otimiza a resposta ao toque em dispositivos móveis, evitando atrasos e melhorando a interatividade */
 }
 
 
@@ -65,7 +66,7 @@ body{
     cursor: pointer;
 }
 
-#confirmButton{
+#confirmButton, #confirm-play-button:disabled{
     font-size: 1em;
     width: 10em;
     height: 2.5em;
@@ -99,10 +100,11 @@ body{
 #tentativas{
     display: none;
     width: 100%;
-    height: calc(100vh - 140px);
+    height: calc(100vh - 180px);
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
+    scrollbar-gutter: stable;
 }
 #senha-propria{
     width: 100%;
@@ -128,6 +130,7 @@ body{
     transition: opacity 0.4s ease, transform 0.4s ease;
     overflow-y: auto;
     height: auto;
+    scrollbar-gutter: stable;
 }
 
 .game-container{
@@ -197,13 +200,16 @@ input[type=number] {
     width: 10em;
     height: 2.5em;
     text-align: center;
-    margin: 5px;
+    margin: 1.5em;
     background-color: #007bff;
     color: white;
     border: none;
     border-radius: 8px;
     transition: all 0.3s ease;
     flex-shrink: 0;
+}
+#confirm-play-button:disabled{
+    margin: 1.5em;
 }
 
 footer{

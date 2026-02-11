@@ -7,10 +7,11 @@ const confirmButton = document.getElementById('confirmButton'); //botao de confi
 const tentativas = document.getElementById('tentativas'); //div que envolve as tentativas e o botão certo
 const myPass = document.getElementById('myPass'); //div para mostrar a sua propria senha
 const app = document.getElementById('app'); //div principal do jogo
+
 //impede que o usuário selecione texto ou elementos da interface, melhorando a experiência de jogo
-document.addEventListener('dblclick', e => {
-    e.preventDefault();
-});
+document.addEventListener('dblclick', e => e.preventDefault());
+document.addEventListener('contextmenu', e => e.preventDefault());
+
 
 let numberEscolhido = 0; //variavel global para armazenar a quantidade de numeros da senha escolhida
 
@@ -75,7 +76,7 @@ function MyPass(qtd) {
 
 const confirmPlayButton = document.createElement('button');
 confirmPlayButton.id = 'confirm-play-button';
-confirmPlayButton.textContent = 'V';
+confirmPlayButton.textContent = 'Anotar Tentativa';
 
 let contagemDeTentativas = 0; //variavel para aumentar o id da div de jogada
 
@@ -173,6 +174,15 @@ function build(length) {
             }
         });
     }
+
+    //backspace para voltar pro input anterior
+    confirmPlayButton.addEventListener("keydown", e => {
+        if (e.key === "Backspace") {
+            const inputs = numberDiv.querySelectorAll(".digit-input");
+            inputs[inputs.length - 1].focus();
+        }
+    });
+
 
     gameContainer.appendChild(numberDiv);
     numberDiv.children[0].focus(); //foca automaticamente no primeiro input da rodada quando ela for criada
