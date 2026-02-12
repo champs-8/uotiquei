@@ -25,6 +25,8 @@ body{
     justify-content: space-between;
     align-items: center;
     height: 100vh;
+    height: 100dvh;
+
 }
 
 #topo{
@@ -52,6 +54,13 @@ body{
 
 #pergunta {
     font-size: 1.6em;
+    text-align: center;
+}
+
+#keyLength{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .length-button{
