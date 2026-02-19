@@ -49,6 +49,7 @@ body{
     right: 15px;
     font-size: 11px;
     font-family: monospace;
+    z-index: 1001;
     background: rgba(0,0,0,0.1);
     padding: 3px 6px;
     border-radius: 6px;
@@ -320,11 +321,12 @@ input[type=number] {
 }
 #painel-auxilio {
     position: fixed;
+    width: 12em;
     right: 2em;
     bottom: 10em;
     background: white;
     border: 2px solid #3498db;
-    padding: 15px;
+    padding: .5em;
     border-radius: 10px;
     z-index: 999;
 }
@@ -335,6 +337,33 @@ input[type=number] {
     font-size: 15px;
     border: 1px solid var(--azul-forte);
     border-radius: 50%;
+}
+#input-auxilio{
+    width: 100%;
+    height: 40px;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 10px;
+    background-color: var(--cor-de-fundo);
+    border:none;
+    border-bottom: 2px solid black;
+}
+#btn-conferir-auxilio{
+    width: 100%;
+    height: 40px;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 10px;
+    background-color: var(--azul-forte);
+    color: white;
+    border:none;
+    border-radius: 5px;
+}
+#resultado-auxilio{
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
 }
 footer{
     background-color: var(--cor-primaria);

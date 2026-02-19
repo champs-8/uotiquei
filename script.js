@@ -13,7 +13,7 @@ document.addEventListener('dblclick', e => e.preventDefault());
 document.addEventListener('contextmenu', e => e.preventDefault());
 
 //variável para armazenar a versão do aplicativo
-const APP_VERSION = "1.0.0";
+const APP_VERSION = "1.2.0";
 const versionTag = document.createElement("div");
 versionTag.id = "version";
 versionTag.textContent = `v${APP_VERSION}`;
@@ -335,6 +335,7 @@ btnAuxilio.addEventListener("click", () => {
 });
 
 
+//auxilio na tela tentativas
 function criarAuxilio(tamanhoSenha, senha) {
 
     console.log(`tamanho:${tamanhoSenha}`);
@@ -350,6 +351,7 @@ function criarAuxilio(tamanhoSenha, senha) {
     
     const btn = document.createElement("button");
     btn.textContent = "Conferir";
+    btn.id = "btn-conferir-auxilio";
     
     btn.onclick = () => {
         const tentativa = input.value;
