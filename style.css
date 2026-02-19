@@ -43,6 +43,19 @@ body{
     height: 60px;
     text-align: center;
 }
+#version {
+    position: fixed;
+    top: 10px;
+    right: 15px;
+    font-size: 11px;
+    font-family: monospace;
+    background: rgba(0,0,0,0.1);
+    padding: 3px 6px;
+    border-radius: 6px;
+    opacity: 0.7;
+}
+
+
 
 #password-length-container{
     display: flex;
@@ -217,14 +230,19 @@ body{
 }
 
 .certo-errado-label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 1.2em;
     color: var(--cor-primaria);
-    margin-right: 1.3em;
+    width: 100px;
 }
 .tentativa-label{
+    display: flex;
     font-size: 1.2em;
     color: var(--cor-primaria);
-    margin-right: 1em;
+    justify-content: center;
+    align-items: center;
 }
 
 .game-container{
@@ -234,14 +252,6 @@ body{
     padding: 0.2em;
     justify-content: space-around;
 }
-
-
-/* vou configurar para quando for media query */
-/* #number{
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-} */
 
 .digit-info, .digit-input {
     width: 40px;
@@ -255,6 +265,9 @@ body{
     cursor: pointer;
     border: 2px solid var(--cor-primaria);
     font-size: 20px;
+}
+.digit-info{
+    border: 2px solid gray;
 }
 
 /* remover as setas dos input number */

@@ -12,6 +12,14 @@ const app = document.getElementById('app'); //div principal do jogo
 document.addEventListener('dblclick', e => e.preventDefault());
 document.addEventListener('contextmenu', e => e.preventDefault());
 
+//variável para armazenar a versão do aplicativo
+const APP_VERSION = "1.0.0";
+const versionTag = document.createElement("div");
+versionTag.id = "version";
+versionTag.textContent = `v${APP_VERSION}`;
+document.body.appendChild(versionTag);
+
+
 
 let numberEscolhido = 0; //variavel global para armazenar a quantidade de numeros da senha escolhida
 
@@ -95,6 +103,11 @@ function MyPass(qtd) {
         //exibe o botão de auxílio para o jogador poder usar a calculadora de certo e errado
         document.getElementById('btn-auxilio').style.display = 'block';
     });
+    
+    //alterar a largura da div inputNumber conforme a quantidade de numeros da senha escolhida
+    //para ficar igual centralizada
+    let tentativaLabel = document.getElementById('tentativa-label');
+    tentativaLabel.style.width = `${qtd * 50}px`;
 }
 
 const confirmPlayButton = document.createElement('button');
@@ -106,6 +119,7 @@ let contagemDeTentativas = 0; //variavel para aumentar o id da div de jogada
 //label para mostrar o rotulo tentativa
 let labelTentativas = document.createElement("div");
 labelTentativas.className = "tentativa-label";
+labelTentativas.id = "tentativa-label";
 labelTentativas.textContent = `Tentativas`;
 
 //label para mostrar os icones de certo e errado
@@ -139,8 +153,6 @@ function build(length) {
     top: listTentativas.scrollHeight,
     behavior: 'smooth'
 });
-
-
 
     confirmPlayButton.disabled = true;
     
