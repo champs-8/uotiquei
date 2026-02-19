@@ -13,7 +13,7 @@ document.addEventListener('dblclick', e => e.preventDefault());
 document.addEventListener('contextmenu', e => e.preventDefault());
 
 //variável para armazenar a versão do aplicativo
-const APP_VERSION = "1.2.0";
+const APP_VERSION = "1.2.1";
 const versionTag = document.createElement("div");
 versionTag.id = "version";
 versionTag.textContent = `v${APP_VERSION}`;
@@ -21,7 +21,8 @@ document.body.appendChild(versionTag);
 
 
 
-let numberEscolhido = 0; //variavel global para armazenar a quantidade de numeros da senha escolhida
+let numberEscolhido; //variavel global para armazenar a quantidade de numeros da senha escolhida
+let senhaGlobal; //variavel global para armazenar a senha digitada pelo usuário
 
 // Adicionando os botões para selecionar a quantidade de números da senha do outro jogador
 for (let i = 3; i <= 10; i++) {
@@ -89,14 +90,17 @@ function MyPass(qtd) {
     });
 
     confirmMyPassButton.addEventListener("click", () => {
-        let senhaPropria = inputMyPass.value; //variavel para armazenar a senha digitada pelo jogador
+        senhaGlobal = inputMyPass.value; //variavel para armazenar a senha digitada pelo jogador
         build(qtd); //chama a função para construir a interface do jogo, passando a quantidade de numeros da senha escolhida
     
+        criarAuxilio(qtd, senhaGlobal);
+        let auxilioCriado = false; //para evitar de chamar duas vezes
+
         //criar div para mostrar a senha do proprio jogador
         //não pode ser no build porque fica repetindo a cada rodada, tem que ser só uma vez
         let senhaMyDiv = document.createElement('div');
         senhaMyDiv.id = 'senha-propria';
-        senhaMyDiv.innerHTML = `Sua senha: &nbsp<span> ${senhaPropria} </span>`;
+        senhaMyDiv.innerHTML = `Sua senha: &nbsp<span> ${senhaGlobal} </span>`;
         tentativas.insertBefore(senhaMyDiv, listTentativas); //insere a div da senha do jogador antes da div de tentativas
         
 
@@ -248,8 +252,6 @@ function build(length) {
     
     confirmPlayButton.onclick = nextRodada;
 
-    let senhaPropria = document.getElementById('input-my-pass').value; //variavel para armazenar a senha digitada pelo jogador, precisa ser declarada aqui para pegar o valor atualizado da senha do jogador a cada rodada
-    criarAuxilio(length,senhaPropria);
 }
 
 function nextRodada() {
@@ -338,11 +340,17 @@ btnAuxilio.addEventListener("click", () => {
 //auxilio na tela tentativas
 function criarAuxilio(tamanhoSenha, senha) {
 
+    if (auxilioCriado) return;
+    auxilioCriado = true;
+
     console.log(`tamanho:${tamanhoSenha}`);
     console.log(`mypass:${senha}`);
 
     const input = document.createElement("input");
     input.id = "input-auxilio";
+    input.type = 'text';
+    input.inputMode = 'numeric';
+    input.min = 0;
     input.maxLength = tamanhoSenha;
 
     
@@ -404,7 +412,7 @@ function analisarTentativa(senha, tentativa) {
             }
         }
     }
-
     return { certos, errados };
 }
+
 

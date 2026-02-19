@@ -11,6 +11,7 @@ Todas as mudanças importantes deste projeto serão documentadas aqui.
 ### Fixed
 - Correção no foco automático após digitar último número
 - Correção espaçamento nos rótulos dos ícones e 'tentativas'
+- Correção do botão auxilio que duplicava'
 
 ---
 
